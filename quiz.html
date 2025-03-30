@@ -2,60 +2,154 @@
 <html lang="zh-Hant">
 <head>
   <meta charset="UTF-8">
-  <title>選擇測驗單元</title>
+  <title>單元測驗</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <style>
-    body {
-      font-family: sans-serif;
-      background-color: #f2f2f2;
-      text-align: center;
-      padding: 0;
-      margin: 0;
+    body { font-family: sans-serif; background: #f2f2f2; margin: 0; padding: 0; text-align: center; }
+    header { background: #4a90e2; color: white; padding: 2rem 0; }
+    .container { max-width: 600px; margin: 2rem auto; padding: 1rem; background: white; border-radius: 10px; }
+    .unit-buttons button, .option, .nav-button {
+      padding: 1rem; width: 100%; margin: 0.5rem 0; font-size: 1rem;
+      border: 1px solid #4a90e2; border-radius: 8px; background: white; color: #4a90e2; cursor: pointer;
     }
-    header {
-      background-color: #4a90e2;
-      color: white;
-      padding: 2rem 0;
-    }
-    .unit-buttons {
-      display: flex;
-      flex-direction: column;
-      gap: 1rem;
-      max-width: 300px;
-      margin: 2rem auto;
-    }
-    .unit-buttons button {
-      padding: 1rem;
-      font-size: 1rem;
-      border: 1px solid #4a90e2;
-      border-radius: 8px;
-      background: white;
-      color: #4a90e2;
-      cursor: pointer;
-    }
-    .unit-buttons button:hover {
-      background: #4a90e2;
-      color: white;
-    }
-    .back {
-      margin: 2rem;
-    }
+    button:hover { background: #4a90e2; color: white; }
+    .result { margin-top: 1rem; font-weight: bold; }
+    .hidden { display: none; }
+    h2 { color: #4a90e2; }
+    .back { margin-top: 2rem; }
+    .back a { text-decoration: none; color: #4a90e2; border: 1px solid #4a90e2; padding: 0.5rem 1rem; border-radius: 5px; }
   </style>
 </head>
 <body>
+
   <header>
-    <h1>🧪 測驗單元選擇</h1>
+    <h1>🧪 六年級數學測驗</h1>
   </header>
-  <div class="unit-buttons">
-    <button>分數與小數</button>
-    <button>百分比</button>
-    <button>面積</button>
-    <button>圓形計算</button>
-    <button>比例</button>
-    <button>統計圖表</button>
+
+  <!-- 單元選擇 -->
+  <div id="unit-select" class="container">
+    <h2>請選擇要測驗的單元：</h2>
+    <div class="unit-buttons">
+      <button onclick="startQuiz('fraction')">分數與小數</button>
+      <!-- 更多單元之後可以加 -->
+    </div>
   </div>
-  <div class="back">
-    <a href="index.html">← 返回首頁</a>
+
+  <!-- 測驗區 -->
+  <div id="quiz-area" class="container hidden">
+    <h2 id="quiz-title">單元測驗</h2>
+    <p id="question-text"></p>
+    <div id="options"></div>
+    <div id="quiz-result" class="result"></div>
+    <p>目前得分：<span id="score">0</span> / <span id="total">0</span></p>
+    <button class="nav-button" onclick="nextQuestion()">下一題</button>
+    <button class="nav-button" onclick="backToMenu()">← 回單元選擇</button>
   </div>
+
+  <!-- 測驗結束 -->
+  <div id="quiz-finish" class="container hidden">
+    <h2>🎉 測驗完成！</h2>
+    <p>你的總得分是 <span id="final-score"></span></p>
+    <button class="nav-button" onclick="restartQuiz()">再測驗一次</button>
+    <button class="nav-button" onclick="backToMenu()">← 回單元選擇</button>
+  </div>
+
+  <div class="back"><a href="index.html">← 返回首頁</a></div>
+
+  <script>
+    const quizzes = {
+      fraction: {
+        title: "分數與小數測驗",
+        questions: [
+          { q: "1/2 = ?", options: ["0.25", "0.5", "0.75"], answer: "0.5" },
+          { q: "1/4 = ?", options: ["0.4", "0.25", "0.75"], answer: "0.25" },
+          { q: "3/4 = ?", options: ["0.75", "0.5", "1.25"], answer: "0.75" }
+        ]
+      }
+    };
+
+    let currentQuiz = null;
+    let questionList = [];
+    let currentIndex = 0;
+    let score = 0;
+
+    function startQuiz(unit) {
+      currentQuiz = quizzes[unit];
+      questionList = shuffleArray([...currentQuiz.questions]);
+      currentIndex = 0;
+      score = 0;
+      document.getElementById("unit-select").classList.add("hidden");
+      document.getElementById("quiz-area").classList.remove("hidden");
+      document.getElementById("quiz-title").textContent = currentQuiz.title;
+      document.getElementById("total").textContent = questionList.length;
+      document.getElementById("score").textContent = score;
+      showQuestion();
+    }
+
+    function showQuestion() {
+      const q = questionList[currentIndex];
+      document.getElementById("question-text").textContent = q.q;
+      const optionsDiv = document.getElementById("options");
+      optionsDiv.innerHTML = "";
+      document.getElementById("quiz-result").textContent = "";
+      shuffleArray(q.options).forEach(opt => {
+        const btn = document.createElement("button");
+        btn.className = "option";
+        btn.textContent = opt;
+        btn.onclick = () => checkAnswer(opt, q.answer);
+        optionsDiv.appendChild(btn);
+      });
+    }
+
+    let hasAnswered = false;
+    function checkAnswer(choice, correct) {
+      if (hasAnswered) return;
+      hasAnswered = true;
+      const result = document.getElementById("quiz-result");
+      if (choice === correct) {
+        score++;
+        document.getElementById("score").textContent = score;
+        result.textContent = "✅ 答對了！";
+        result.style.color = "green";
+      } else {
+        result.textContent = "❌ 錯了，正確答案是：" + correct;
+        result.style.color = "red";
+      }
+    }
+
+    function nextQuestion() {
+      if (!hasAnswered) return alert("請先作答！");
+      hasAnswered = false;
+      currentIndex++;
+      if (currentIndex < questionList.length) {
+        showQuestion();
+      } else {
+        document.getElementById("quiz-area").classList.add("hidden");
+        document.getElementById("quiz-finish").classList.remove("hidden");
+        document.getElementById("final-score").textContent = score + " / " + questionList.length;
+      }
+    }
+
+    function restartQuiz() {
+      currentIndex = 0;
+      score = 0;
+      questionList = shuffleArray([...currentQuiz.questions]);
+      document.getElementById("quiz-finish").classList.add("hidden");
+      document.getElementById("quiz-area").classList.remove("hidden");
+      document.getElementById("score").textContent = score;
+      showQuestion();
+    }
+
+    function backToMenu() {
+      document.getElementById("quiz-area").classList.add("hidden");
+      document.getElementById("quiz-finish").classList.add("hidden");
+      document.getElementById("unit-select").classList.remove("hidden");
+    }
+
+    function shuffleArray(array) {
+      return array.sort(() => Math.random() - 0.5);
+    }
+  </script>
+
 </body>
 </html>
