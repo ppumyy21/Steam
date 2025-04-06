@@ -1,244 +1,269 @@
 <!DOCTYPE html>
 <html lang="zh-Hant">
 <head>
-  <meta charset="UTF-8" />
-  <title>遊戲選擇</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta charset="UTF-8">
+  <title>數學遊戲選單</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <style>
-    body {
-      font-family: sans-serif;
-      background-color: #f2f2f2;
-      margin: 0;
-      padding: 0;
-      text-align: center;
-    }
-
-    header {
-      background-color: #4a90e2;
-      color: white;
-      padding: 2rem 0;
-    }
-
-    .section {
-      max-width: 500px;
-      margin: 2rem auto;
-    }
-
-    button {
-      padding: 1rem;
-      width: 100%;
-      font-size: 1rem;
-      margin: 0.5rem 0;
-      border: 1px solid #4a90e2;
-      background: white;
-      color: #4a90e2;
-      border-radius: 8px;
-      cursor: pointer;
-    }
-
-    button:hover {
-      background-color: #4a90e2;
-      color: white;
-    }
-
-    .result {
-      margin-top: 1rem;
-      font-weight: bold;
-    }
-
-    .hidden {
-      display: none;
-    }
-
-    .back-button {
-      margin-top: 2rem;
-    }
-
-    .back-button a {
-      text-decoration: none;
-      color: #4a90e2;
-      border: 1px solid #4a90e2;
-      padding: 0.5rem 1rem;
-      border-radius: 5px;
-    }
-
-    h2 {
-      color: #4a90e2;
-    }
+    body { font-family: sans-serif; background: #f9f9f9; margin: 0; padding: 0; text-align: center; }
+    header { background-color: #4a90e2; color: white; padding: 2rem 0; }
+    .container { max-width: 800px; margin: 2rem auto; background: white; padding: 2rem; border-radius: 10px; }
+    .game-button, .option, .nav-button { display: block; margin: 1rem auto; padding: 1rem; width: 80%; font-size: 1rem; border: 1px solid #4a90e2; border-radius: 8px; background: white; color: #4a90e2; cursor: pointer; }
+    .game-button:hover, .nav-button:hover { background: #4a90e2; color: white; }
+    .hidden { display: none; }
+    .back { margin-top: 2rem; }
+    .back a { text-decoration: none; color: #4a90e2; border: 1px solid #4a90e2; padding: 0.5rem 1rem; border-radius: 5px; }
+    #memory-game { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; margin: 20px; }
   </style>
 </head>
 <body>
 
-  <header>
-    <h1>🎮 選擇一個遊戲來挑戰！</h1>
-  </header>
+<header>
+  <h1>🎮 選擇一個遊戲開始</h1>
+</header>
 
-  <!-- 選擇遊戲 -->
-  <div id="menu" class="section">
-    <button onclick="prepareGame('math')">算式快打</button>
-    <button onclick="prepareGame('shape')">圖形配對</button>
-    <button onclick="prepareGame('percent')">百分比冒險</button>
-  </div>
+<div id="menu" class="container">
+  <button class="game-button" onclick="startGame(1)">遊戲1：小考遊戲</button>
+  <button class="game-button" onclick="startGame(2)">遊戲2：分數配對小數</button>
+  <button class="game-button" onclick="startGame(3)">遊戲3：記憶遊戲</button>
+</div>
 
-  <!-- 選擇題數 -->
-  <div id="question-count" class="section hidden">
-    <h2 id="game-title"></h2>
-    <p>請選擇你要挑戰的題數：</p>
-    <button onclick="startGame(10)">10 題</button>
-    <button onclick="startGame(15)">15 題</button>
-    <button onclick="startGame(20)">20 題</button>
-  </div>
+<!-- 遊戲1 小考遊戲 -->
+<div id="game1" class="container hidden">
+  <h2 id="question-text"></h2>
+  <div id="options"></div>
+  <div id="quiz-result" class="result"></div>
+  <p>得分：<span id="score">0</span> / 10</p>
+  <button class="nav-button" onclick="nextQuestion()">下一題</button>
+  <button class="nav-button" onclick="restartQuiz()">重新挑戰</button>
+  <button class="nav-button" onclick="goBack()">返回選單</button>
+</div>
 
-  <!-- 題目區 -->
-  <div id="game-container" class="section hidden">
-    <h2 id="game-question-title"></h2>
-    <p id="question-text"></p>
-    <div id="options"></div>
-    <div id="game-result" class="result"></div>
-    <p>目前分數：<span id="score">0</span> / <span id="total"></span></p>
-    <button onclick="nextQuestion()">下一題</button>
-    <button onclick="goBack()">← 回遊戲選單</button>
-  </div>
+<!-- 遊戲2 配對遊戲 -->
+<div id="game2" class="container hidden">
+  <h2>分數配對小數遊戲</h2>
+  <div id="memory-game"></div>
+  <div id="game2-result" style="margin-top: 1rem; font-weight: bold;"></div>
+  <button class="nav-button" onclick="goBack()">返回選單</button>
+</div>
 
-  <!-- 完成區 -->
-  <div id="game-finish" class="section hidden">
-    <h2>🎉 恭喜完成挑戰！</h2>
-    <p>你的得分是：<span id="final-score"></span> 分！</p>
-    <button onclick="restartGame()">再挑戰一次</button>
-    <button onclick="goBack()">← 回遊戲選單</button>
-  </div>
+<!-- 遊戲3 記憶遊戲 -->
+<div id="game3" class="container hidden">
+  <h2>記憶遊戲</h2>
+  <div id="memory-numbers" style="font-size: 2rem; margin: 20px;"></div>
+  <div id="memory-question" style="margin: 20px;"></div>
+  <input type="text" id="memory-answer" placeholder="請輸入答案" style="padding: 0.5rem; font-size: 1rem;" class="hidden">
+  <div id="memory-result" style="margin-top: 1rem; font-weight: bold;"></div>
+  <button class="nav-button hidden" id="submit-answer" onclick="submitMemoryAnswer()">提交答案</button>
+  <button class="nav-button hidden" id="restart-memory" onclick="startMemoryChallenge()">再來一次</button>
+  <button class="nav-button" onclick="goBack()">返回選單</button>
+</div>
 
-  <div class="back-button">
-    <a href="index.html">← 返回首頁</a>
-  </div>
+<div class="back">
+  <a href="index.html">← 返回首頁</a>
+</div>
 
-  <script>
-    const games = {
-      math: {
-        title: "🧠 算式快打",
-        questions: [
-          { q: "7 × 6 = ?", options: ["42", "36", "48"], answer: "42" },
-          { q: "8 × 5 = ?", options: ["45", "40", "35"], answer: "40" },
-          { q: "9 × 3 = ?", options: ["27", "21", "18"], answer: "27" },
-          { q: "6 × 4 = ?", options: ["24", "30", "20"], answer: "24" },
-          { q: "3 × 7 = ?", options: ["21", "24", "27"], answer: "21" }
-        ]
-      },
-      shape: {
-        title: "🔶 圖形配對",
-        questions: [
-          { q: "這是什麼圖形？🟩", options: ["正方形", "長方形", "圓形"], answer: "正方形" },
-          { q: "這是什麼圖形？⚪", options: ["三角形", "圓形", "正方形"], answer: "圓形" },
-          { q: "這是什麼圖形？🟥", options: ["長方形", "正方形", "橢圓"], answer: "正方形" },
-          { q: "這是什麼圖形？🔺", options: ["三角形", "圓形", "梯形"], answer: "三角形" }
-        ]
-      },
-      percent: {
-        title: "📊 百分比冒險",
-        questions: [
-          { q: "25% = ?", options: ["0.25", "2.5", "0.75"], answer: "0.25" },
-          { q: "50% = ?", options: ["0.1", "0.5", "5"], answer: "0.5" },
-          { q: "75% = ?", options: ["0.75", "1.75", "0.25"], answer: "0.75" },
-          { q: "10% = ?", options: ["0.1", "0.01", "1"], answer: "0.1" }
-        ]
-      }
-    };
+<script>
+function startGame(number) {
+  document.getElementById("menu").classList.add("hidden");
+  document.querySelectorAll(".container").forEach(div => div.classList.add("hidden"));
+  document.getElementById("game" + number).classList.remove("hidden");
+  if (number === 1) showQuestion();
+  if (number === 2) startMemoryGame();
+  if (number === 3) startMemoryChallenge();
+}
 
-    let currentGame = null;
-    let selectedQuestions = [];
-    let currentIndex = 0;
-    let score = 0;
-    let totalQuestions = 0;
+function goBack() {
+  document.querySelectorAll(".container").forEach(div => div.classList.add("hidden"));
+  document.getElementById("menu").classList.remove("hidden");
+}
 
-    function prepareGame(type) {
-      currentGame = games[type];
-      document.getElementById("menu").classList.add("hidden");
-      document.getElementById("question-count").classList.remove("hidden");
-      document.getElementById("game-title").textContent = currentGame.title;
+// 遊戲1 小考
+const questions = [
+  { q: "1/2 = ?", options: ["0.25", "0.5", "0.75"], answer: "0.5" },
+  { q: "3/4 = ?", options: ["0.75", "0.5", "0.25"], answer: "0.75" },
+  { q: "50% = ?", options: ["0.25", "0.5", "0.75"], answer: "0.5" },
+  { q: "25% = ?", options: ["0.25", "0.4", "0.75"], answer: "0.25" },
+];
+let questionList = shuffleArray([...questions]).slice(0, 10);
+let currentIndex = 0;
+let score = 0;
+let hasAnswered = false;
+
+function showQuestion() {
+  const q = questionList[currentIndex];
+  document.getElementById("question-text").textContent = q.q;
+  const optionsDiv = document.getElementById("options");
+  optionsDiv.innerHTML = "";
+  document.getElementById("quiz-result").textContent = "";
+  hasAnswered = false;
+
+  shuffleArray(q.options).forEach(opt => {
+    const btn = document.createElement("button");
+    btn.className = "option";
+    btn.textContent = opt;
+    btn.onclick = () => checkAnswer(btn, opt, q.answer);
+    optionsDiv.appendChild(btn);
+  });
+}
+
+function checkAnswer(button, choice, correct) {
+  if (hasAnswered) return;
+  hasAnswered = true;
+  const result = document.getElementById("quiz-result");
+  const allOptions = document.querySelectorAll(".option");
+  allOptions.forEach(btn => btn.disabled = true);
+
+  if (choice === correct) {
+    score++;
+    document.getElementById("score").textContent = score;
+    result.textContent = "✅ 答對了！";
+    result.style.color = "green";
+    button.style.backgroundColor = "#c8f7c5";
+  } else {
+    result.textContent = "❌ 錯了，正確答案是：" + correct;
+    result.style.color = "red";
+    button.style.backgroundColor = "#f7c5c5";
+  }
+}
+
+function nextQuestion() {
+  if (!hasAnswered) return alert("請先作答！");
+  currentIndex++;
+  if (currentIndex < questionList.length) {
+    showQuestion();
+  } else {
+    alert("🎉 小考結束！你的得分是：" + score + "/10");
+    restartQuiz();
+  }
+}
+
+function restartQuiz() {
+  questionList = shuffleArray([...questions]).slice(0, 10);
+  currentIndex = 0;
+  score = 0;
+  document.getElementById("score").textContent = score;
+  showQuestion();
+}
+
+// 遊戲2 配對
+const pairs = [
+  { fraction: "1/2", decimal: "0.5" },
+  { fraction: "1/4", decimal: "0.25" },
+  { fraction: "3/4", decimal: "0.75" },
+  { fraction: "2/5", decimal: "0.4" },
+  { fraction: "4/5", decimal: "0.8" }
+];
+let memoryCards = [];
+let firstCard = null;
+let secondCard = null;
+let matches = 0;
+
+function startMemoryGame() {
+  const gameArea = document.getElementById("memory-game");
+  document.getElementById("game2-result").textContent = "";
+  gameArea.innerHTML = "";
+  matches = 0;
+  firstCard = null;
+  secondCard = null;
+
+  memoryCards = [];
+  pairs.forEach(pair => {
+    memoryCards.push({ text: pair.fraction, pair: pair.decimal });
+    memoryCards.push({ text: pair.decimal, pair: pair.fraction });
+  });
+  memoryCards = memoryCards.sort(() => Math.random() - 0.5);
+
+  memoryCards.forEach((card, index) => {
+    const cardButton = document.createElement("button");
+    cardButton.textContent = "❓";
+    cardButton.className = "option";
+    cardButton.dataset.text = card.text;
+    cardButton.dataset.pair = card.pair;
+    cardButton.dataset.index = index;
+    cardButton.onclick = () => flipCard(cardButton);
+    gameArea.appendChild(cardButton);
+  });
+}
+
+function flipCard(cardButton) {
+  if (cardButton.disabled || cardButton === firstCard) return;
+  cardButton.textContent = cardButton.dataset.text;
+
+  if (!firstCard) {
+    firstCard = cardButton;
+  } else {
+    secondCard = cardButton;
+
+    if (firstCard.dataset.text === secondCard.dataset.pair) {
+      setTimeout(() => {
+        firstCard.style.visibility = "hidden";
+        secondCard.style.visibility = "hidden";
+        firstCard = null;
+        secondCard = null;
+        matches++;
+        if (matches === pairs.length) {
+          document.getElementById("game2-result").textContent = "🎉 配對成功！全部完成！";
+        }
+      }, 500);
+    } else {
+      setTimeout(() => {
+        firstCard.textContent = "❓";
+        secondCard.textContent = "❓";
+        firstCard = null;
+        secondCard = null;
+      }, 800);
     }
+  }
+}
 
-    function startGame(count) {
-      // 準備題目
-      score = 0;
-      currentIndex = 0;
-      totalQuestions = count;
-      selectedQuestions = [];
+// 遊戲3 記憶遊戲
+let memoryNumbers = [];
+let questionIndex = 0;
+let memoryScore = 0;
 
-      let allQs = [...currentGame.questions];
-      while (selectedQuestions.length < count) {
-        if (allQs.length === 0) allQs = [...currentGame.questions]; // 如果題目不夠，重複取
-        const i = Math.floor(Math.random() * allQs.length);
-        selectedQuestions.push(allQs.splice(i, 1)[0]);
-      }
+function startMemoryChallenge() {
+  document.getElementById("memory-result").textContent = "";
+  document.getElementById("memory-answer").classList.add("hidden");
+  document.getElementById("submit-answer").classList.add("hidden");
+  document.getElementById("restart-memory").classList.add("hidden");
+  document.getElementById("memory-question").textContent = "";
 
-      document.getElementById("question-count").classList.add("hidden");
-      document.getElementById("game-container").classList.remove("hidden");
-      document.getElementById("game-question-title").textContent = currentGame.title;
-      document.getElementById("total").textContent = totalQuestions;
-      document.getElementById("score").textContent = score;
-      showQuestion();
-    }
+  memoryNumbers = Array.from({ length: 5 }, () => Math.floor(Math.random() * 10));
+  document.getElementById("memory-numbers").textContent = memoryNumbers.join("  ");
 
-    function showQuestion() {
-      const q = selectedQuestions[currentIndex];
-      document.getElementById("question-text").textContent = q.q;
-      const optionsDiv = document.getElementById("options");
-      optionsDiv.innerHTML = "";
-      shuffleArray(q.options).forEach(opt => {
-        const btn = document.createElement("button");
-        btn.textContent = opt;
-        btn.className = "option";
-        btn.onclick = () => checkAnswer(opt, q.answer);
-        optionsDiv.appendChild(btn);
-      });
-    }
+  setTimeout(() => {
+    document.getElementById("memory-numbers").textContent = "";
+    askMemoryQuestion();
+  }, 3000);
+}
 
-    function checkAnswer(choice, correct) {
-      const result = document.getElementById("game-result");
-      if (choice === correct) {
-        result.textContent = "✅ 答對了！";
-        result.style.color = "green";
-        score++;
-        document.getElementById("score").textContent = score;
-      } else {
-        result.textContent = "❌ 錯了，再接再厲！";
-        result.style.color = "red";
-      }
-    }
+function askMemoryQuestion() {
+  memoryScore = 0;
+  questionIndex = Math.floor(Math.random() * memoryNumbers.length);
+  document.getElementById("memory-question").textContent = `請輸入剛剛看到的第 ${questionIndex + 1} 個數字是？`;
+  document.getElementById("memory-answer").value = "";
+  document.getElementById("memory-answer").classList.remove("hidden");
+  document.getElementById("submit-answer").classList.remove("hidden");
+}
 
-    function nextQuestion() {
-      currentIndex++;
-      document.getElementById("game-result").textContent = "";
-      if (currentIndex < totalQuestions) {
-        showQuestion();
-      } else {
-        document.getElementById("game-container").classList.add("hidden");
-        document.getElementById("game-finish").classList.remove("hidden");
-        document.getElementById("final-score").textContent = `${score} / ${totalQuestions}`;
-      }
-    }
+function submitMemoryAnswer() {
+  const userAnswer = document.getElementById("memory-answer").value;
+  if (userAnswer == memoryNumbers[questionIndex]) {
+    document.getElementById("memory-result").textContent = "✅ 答對了！太棒了！";
+    document.getElementById("memory-result").style.color = "green";
+  } else {
+    document.getElementById("memory-result").textContent = `❌ 錯了，正確答案是 ${memoryNumbers[questionIndex]}。`;
+    document.getElementById("memory-result").style.color = "red";
+  }
+  document.getElementById("submit-answer").classList.add("hidden");
+  document.getElementById("restart-memory").classList.remove("hidden");
+}
 
-    function restartGame() {
-      document.getElementById("game-finish").classList.add("hidden");
-      document.getElementById("question-count").classList.remove("hidden");
-    }
-
-    function goBack() {
-      document.getElementById("menu").classList.remove("hidden");
-      document.getElementById("question-count").classList.add("hidden");
-      document.getElementById("game-container").classList.add("hidden");
-      document.getElementById("game-finish").classList.add("hidden");
-      document.getElementById("game-result").textContent = "";
-    }
-
-    function shuffleArray(array) {
-      for (let i = array.length - 1; i > 0; i--) {
-        const j = Math.floor(Math.random() * (i + 1));
-        [array[i], array[j]] = [array[j], array[i]];
-      }
-      return array;
-    }
-  </script>
+function shuffleArray(array) {
+  return array.sort(() => Math.random() - 0.5);
+}
+</script>
 
 </body>
 </html>
