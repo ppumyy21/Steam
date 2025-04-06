@@ -2,81 +2,107 @@
 <html lang="zh-Hant">
 <head>
   <meta charset="UTF-8">
-  <title>教學內容</title>
+  <title>六年級數學教學</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <style>
-    body {
-      font-family: sans-serif;
-      background-color: #f9f9f9;
-      padding: 0;
-      margin: 0;
-    }
-    header {
-      background-color: #4a90e2;
-      color: white;
-      padding: 1.5rem 0;
-      text-align: center;
-    }
-    .container {
-      max-width: 800px;
-      margin: 2rem auto;
-      padding: 1rem 2rem;
-      background: white;
-      border-radius: 10px;
-    }
-    details {
-      margin-bottom: 1rem;
-    }
-    summary {
-      font-weight: bold;
-      color: #4a90e2;
-      cursor: pointer;
-    }
-    .back {
-      text-align: center;
-      margin: 2rem;
-    }
-    .back a {
-      text-decoration: none;
-      color: #4a90e2;
-      border: 1px solid #4a90e2;
-      padding: 0.5rem 1rem;
-      border-radius: 5px;
-    }
+    body { font-family: sans-serif; background: #f9f9f9; margin: 0; padding: 0; text-align: center; }
+    header { background-color: #4a90e2; color: white; padding: 2rem 0; }
+    .container { max-width: 800px; margin: 2rem auto; background: white; padding: 2rem; border-radius: 10px; }
+    details { margin-bottom: 1rem; text-align: left; }
+    summary { font-weight: bold; font-size: 1.2rem; cursor: pointer; color: #4a90e2; }
+    p, li { margin: 0.5rem 0 1rem 1rem; }
+    ul { margin-left: 2rem; }
+    .back { margin: 2rem; }
+    .back a { text-decoration: none; color: #4a90e2; border: 1px solid #4a90e2; padding: 0.5rem 1rem; border-radius: 5px; }
   </style>
 </head>
 <body>
-  <header>
-    <h1>📘 教學內容</h1>
-  </header>
-  <div class="container">
-    <details open>
-      <summary>1. 分數與小數互換</summary>
-      <p>將分數除以分母可得小數，例如：1/2 = 0.5</p>
-    </details>
-    <details>
-      <summary>2. 百分比的計算與應用</summary>
-      <p>百分比是以100為底的數，例如：25% = 0.25</p>
-    </details>
-    <details>
-      <summary>3. 面積公式</summary>
-      <p>長方形：長×寬；正方形：邊×邊</p>
-    </details>
-    <details>
-      <summary>4. 圓形計算</summary>
-      <p>圓周長 = 2×π×r；面積 = π×r²</p>
-    </details>
-    <details>
-      <summary>5. 比與比例</summary>
-      <p>比的表示：2:3，常應用在縮圖與配方</p>
-    </details>
-    <details>
-      <summary>6. 統計圖表</summary>
-      <p>包含長條圖、圓餅圖、折線圖</p>
-    </details>
-  </div>
-  <div class="back">
-    <a href="index.html">← 返回首頁</a>
-  </div>
+
+<header>
+  <h1>📘 六年級數學教學</h1>
+</header>
+
+<div class="container">
+
+  <details>
+    <summary>1. 分數與小數互換</summary>
+    <p>🔹 分數：表示把一個整體分成若干份，取其中的部分。</p>
+    <p>🔹 小數：是分數的另一種表示方法，特別是十分位、百分位的小數。</p>
+    <p>【轉換方法】分子 ÷ 分母 = 小數</p>
+    <ul>
+      <li>1/2 = 1 ÷ 2 = 0.5</li>
+      <li>3/4 = 3 ÷ 4 = 0.75</li>
+    </ul>
+    <p><strong>小提醒：</strong> 分子比分母大的時候，答案會大於 1，例如 5/4 = 1.25。</p>
+  </details>
+
+  <details>
+    <summary>2. 百分比的計算與應用</summary>
+    <p>🔹 百分比：以 100 為基礎，表示一個數量與整體的關係。</p>
+    <p>【轉換方法】百分比 ÷ 100 = 小數</p>
+    <ul>
+      <li>25% = 0.25</li>
+      <li>50% = 0.5</li>
+      <li>75% = 0.75</li>
+    </ul>
+    <p><strong>例題：</strong> 30% = 0.3，8% = 0.08</p>
+    <p><strong>小提醒：</strong> 百分比不是直接拿掉「%」，要先除以 100！</p>
+  </details>
+
+  <details>
+    <summary>3. 面積公式</summary>
+    <p>🔹 面積：物體表面的大小，通常用平方單位表示（如 cm²）。</p>
+    <p>【長方形面積公式】長 × 寬</p>
+    <p>【正方形面積公式】邊長 × 邊長</p>
+    <ul>
+      <li>長 5cm、寬 4cm 的長方形面積 = 5 × 4 = 20cm²</li>
+      <li>邊長 6cm 的正方形面積 = 6 × 6 = 36cm²</li>
+    </ul>
+    <p><strong>小提醒：</strong> 記得單位要平方（cm²、m²）！</p>
+  </details>
+
+  <details>
+    <summary>4. 圓形公式</summary>
+    <p>🔹 圓周長公式：2 × π × 半徑 (r)</p>
+    <p>🔹 圓面積公式：π × 半徑 × 半徑</p>
+    <ul>
+      <li>π 約等於 3.14</li>
+      <li>圓周長例題：半徑 5cm，圓周長 ≈ 2 × 3.14 × 5 = 31.4cm</li>
+      <li>圓面積例題：半徑 3cm，圓面積 ≈ 3.14 × 3 × 3 = 28.26cm²</li>
+    </ul>
+    <p><strong>小提醒：</strong> 面積是平方單位，周長是長度單位！</p>
+  </details>
+
+  <details>
+    <summary>5. 比例與比的應用</summary>
+    <p>🔹 比：比較兩個數量的大小，寫成「a:b」。</p>
+    <p>🔹 比例：兩個比相等，表示兩組數量之間有固定的倍數關係。</p>
+    <ul>
+      <li>2:3 和 4:6 是相同的比例。</li>
+      <li>化簡比例：6:9 可簡化為 2:3</li>
+    </ul>
+    <p><strong>例題：</strong> 10:15 = 2:3（除以 5）</p>
+    <p><strong>小提醒：</strong> 簡化比例時，要同時除以相同的數。</p>
+  </details>
+
+  <details>
+    <summary>6. 資料統計與圖表解讀</summary>
+    <p>🔹 長條圖：比較不同項目的數量。</p>
+    <p>🔹 圓餅圖：顯示整體中各部分的比例。</p>
+    <p>🔹 折線圖：觀察數據隨時間變化的趨勢。</p>
+    <ul>
+      <li>長條圖例子：比較各班人數。</li>
+      <li>圓餅圖例子：顯示一週內各科目讀書時間比例。</li>
+      <li>折線圖例子：記錄一週每天的氣溫變化。</li>
+    </ul>
+    <p><strong>小提醒：</strong> 看圖表時要注意標題和單位！</p>
+  </details>
+
+</div>
+
+<div class="back">
+  <a href="index.html">← 返回首頁</a>
+</div>
+
 </body>
 </html>
