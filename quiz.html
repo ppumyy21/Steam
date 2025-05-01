@@ -2,170 +2,192 @@
 <html lang="zh-Hant">
 <head>
   <meta charset="UTF-8">
-  <title>六年級數學測驗</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>六下數學測驗 - 輸入答案版</title>
   <style>
-    body { font-family: sans-serif; background: #f0f8ff; text-align: center; padding: 2rem; }
-    .unit-button, .option, .nav-button {
-      display: block;
-      margin: 1rem auto;
-      padding: 1rem;
-      width: 80%;
-      max-width: 300px;
-      font-size: 1.2rem;
-      border: 1px solid #4a90e2;
-      border-radius: 8px;
-      background: white;
-      color: #4a90e2;
-      cursor: pointer;
+    body { font-family: Arial, sans-serif; padding: 20px; text-align: center; background-color: #f9f9f9; }
+    button {
+      background-color: #4CAF50; color: white; font-size: 20px; padding: 15px 30px;
+      border: none; border-radius: 12px; cursor: pointer; box-shadow: 3px 3px 8px rgba(0,0,0,0.3);
+      margin: 10px;
     }
-    .unit-button:hover, .nav-button:hover { background: #4a90e2; color: white; }
-    .hidden { display: none; }
+    button:hover { background-color: #45a049; }
+    input[type="text"] { font-size: 18px; padding: 8px; margin-top: 10px; }
+    #unitSelect { padding: 10px; font-size: 18px; margin-bottom: 20px; }
   </style>
 </head>
 <body>
-
-<h1>🎯 選擇要測驗的單元</h1>
-
-<div id="unit-selection">
-  <button class="unit-button" onclick="startQuiz('分數與小數')">分數與小數</button>
-  <button class="unit-button" onclick="startQuiz('百分比')">百分比</button>
-  <button class="unit-button" onclick="startQuiz('面積公式')">面積公式</button>
-  <button class="unit-button" onclick="startQuiz('圓形公式')">圓形公式</button>
-  <button class="unit-button" onclick="startQuiz('比例')">比例</button>
-  <button class="unit-button" onclick="startQuiz('資料統計')">資料統計</button>
-</div>
-
-<div id="quiz" class="hidden">
-  <h2 id="question-text"></h2>
-  <div id="options"></div>
-  <div id="result" style="margin:1rem;font-weight:bold;"></div>
-  <p>得分：<span id="score">0</span> / <span id="total">0</span></p>
-  <button class="nav-button" onclick="nextQuestion()">下一題</button>
-  <button class="nav-button" onclick="restart()">重新選單元</button>
-</div>
-
+  <button onclick="location.href='index.html'">回首頁</button>
+  <h1>六下數學測驗</h1>
+  <div id="setup">
+    <select id="unitSelect">
+      <option value="">請選擇單元</option>
+      <option value="小數、分數四則運算">小數、分數四則運算</option>
+      <option value="圓面積與扇形面積">圓面積與扇形面積</option>
+      <option value="速率">速率</option>
+      <option value="統計圖與可能性">統計圖與可能性</option>
+    </select><br>
+    <button onclick="startQuiz()">開始測驗</button>
+  </div>
+  <div id="quiz" style="display:none;">
+    <h2 id="questionText"></h2>
+    <input type="text" id="answerInput" placeholder="請輸入答案"><br><br>
+    <button onclick="submitAnswer()">送出答案</button>
+  </div>
+  <div id="result" style="display:none;">
+    <h2 id="scoreText"></h2>
+    <button onclick="restartQuiz()">重新作答</button>
+    <button onclick="location.href='index.html'">回首頁</button>
+  </div>
 <script>
-const allQuestions = {
-  "分數與小數": [
-    { q: "1/2變成小數是多少？", options: ["0.5", "0.25", "0.75"], answer: "0.5" },
-    { q: "1/4變成小數是多少？", options: ["0.25", "0.5", "0.75"], answer: "0.25" },
-    { q: "3/4變成小數是多少？", options: ["0.75", "0.5", "1.0"], answer: "0.75" },
-    { q: "2/5變成小數是多少？", options: ["0.4", "0.5", "0.8"], answer: "0.4" },
-    { q: "4/5變成小數是多少？", options: ["0.8", "0.5", "0.75"], answer: "0.8" },
-    { q: "1/5變成小數是多少？", options: ["0.2", "0.5", "0.8"], answer: "0.2" },
-    { q: "3/5變成小數是多少？", options: ["0.6", "0.5", "0.8"], answer: "0.6" }
+const questionBank = {
+  "小數、分數四則運算": [
+    { question: "33/28 ÷ 6/7 =", answer: "11/4" },
+    { question: "4/7 ÷ 28/5 =", answer: "5/42" },
+    { question: "8/15 × 4/5 =", answer: "32/75" },
+    { question: "5/8 + 1/4 =", answer: "7/8" },
+    { question: "5/6 ÷ 3 =", answer: "5/18" },
+    { question: "5/6 ÷ 5 =", answer: "1/6" },
+    { question: "3/7 × 7/9 =", answer: "1/3" },
+    { question: "5/8 + 2/4 - 3/8 =", answer: "3/4" },
+    { question: "2/3 ÷ 5/6 =", answer: "4/5" },
+    { question: "5/6 + 8/9 - 3/4 =", answer: "29/36" },
+    { question: "3/10 ÷ 4/3 =", answer: "9/40" },
+    { question: "2/5 × 3/10 =", answer: "3/25" },
+    { question: "2 5/8 ÷ 3/4 =", answer: "35/12" },
+    { question: "3/7 ÷ 1 7/2 =", answer: "6/25" },
+    { question: "5 × 2/3 =", answer: "10/3" }
   ],
-  "百分比": [
-    { q: "50%變成小數是多少？", options: ["0.25", "0.5", "0.75"], answer: "0.5" },
-    { q: "25%變成小數是多少？", options: ["0.25", "0.4", "0.6"], answer: "0.25" },
-    { q: "10%變成小數是多少？", options: ["0.1", "0.01", "0.5"], answer: "0.1" },
-    { q: "75%變成小數是多少？", options: ["0.5", "0.75", "1.0"], answer: "0.75" },
-    { q: "5%變成小數是多少？", options: ["0.05", "0.5", "0.25"], answer: "0.05" },
-    { q: "100%是小數多少？", options: ["1", "0.5", "2"], answer: "1" }
+  "圓面積與扇形面積": [
+    { question: "半徑為 6 公分的圓，面積是多少？（用π表示）", answer: "36π" },
+    { question: "半徑 5 公分，面積是多少？（用π表示）", answer: "25π" },
+    { question: "直徑是 8 公分的圓，面積為？", answer: "16π" },
+    { question: "半徑是 9 公分，面積為？", answer: "81π" },
+    { question: "圓的半徑是 12 公分，面積？", answer: "144π" },
+    { question: "半徑 6 公分的扇形，中心角為 90 度，面積？", answer: "9π" },
+    { question: "半徑 10 公分，中心角為 180 度，扇形面積？", answer: "50π" },
+    { question: "半徑為 4 公分，中心角 60 度，扇形面積？", answer: "8π/3" },
+    { question: "半徑 7 公分，中心角為 270 度，扇形面積？", answer: "103.95" },
+    { question: "直徑 10 公分，面積為？", answer: "25π" },
+    { question: "扇形半徑 8 公分，中心角 90 度，面積？", answer: "16π" },
+    { question: "扇形半徑 5 公分，中心角 60 度，面積？", answer: "25π/6" },
+    { question: "扇形半徑 12 公分，中心角 45 度，面積？", answer: "54π" },
+    { question: "圓面積 64π，半徑為？", answer: "8" },
+    { question: "圓面積為 100π，半徑為？", answer: "10" }
   ],
-  "面積公式": [
-    { q: "長方形的面積公式是？", options: ["長×寬", "長+寬", "邊長×邊長"], answer: "長×寬" },
-    { q: "正方形的面積公式是？", options: ["邊長×邊長", "底×高", "底×高÷2"], answer: "邊長×邊長" },
-    { q: "三角形的面積公式是？", options: ["底×高÷2", "底×高", "邊長×邊長"], answer: "底×高÷2" },
-    { q: "平行四邊形的面積公式是？", options: ["底×高", "長×寬", "邊長×邊長"], answer: "底×高" },
-    { q: "梯形的面積公式是？", options: ["(上底+下底)×高÷2", "底×高÷2", "邊長×邊長"], answer: "(上底+下底)×高÷2" }
+  "速率": [
+    { question: "走 600 公尺用了 5 分鐘，速率是多少？（單位：公尺/分）", answer: "120" },
+    { question: "跑 2400 公尺用了 8 分鐘，速率是？", answer: "300" },
+    { question: "每分鐘走 150 公尺，10 分鐘走多遠？", answer: "1500" },
+    { question: "距離 4 公里，速率是每小時 8 公里，時間是？（小時）", answer: "0.5" },
+    { question: "每小時行 20 公里，2.5 小時行幾公里？", answer: "50" },
+    { question: "行 180 公里用了 3 小時，速率？", answer: "60" },
+    { question: "走 960 公尺，速率 80 公尺/分，時間？", answer: "12" },
+    { question: "速率 100 公尺/分，走 250 公尺，需時？", answer: "2.5" },
+    { question: "1 小時行 60 公里，30 分鐘行？", answer: "30" },
+    { question: "每分鐘走 80 公尺，8 分鐘走幾公尺？", answer: "640" },
+    { question: "走 900 公尺花 10 分鐘，速率？", answer: "90" },
+    { question: "5 小時走 300 公里，速率？", answer: "60" },
+    { question: "行 160 公里用了 4 小時，速率？", answer: "40" },
+    { question: "速率 75 公里/時，行 150 公里要多久？", answer: "2" },
+    { question: "3 小時走 120 公里，速率？", answer: "40" }
   ],
-  "圓形公式": [
-    { q: "圓的面積公式是？", options: ["半徑×半徑×3.14", "半徑×2", "直徑×2"], answer: "半徑×半徑×3.14" },
-    { q: "圓的周長公式是？", options: ["直徑×3.14", "半徑×3.14", "半徑+半徑"], answer: "直徑×3.14" },
-    { q: "直徑是半徑的幾倍？", options: ["2倍", "3倍", "1倍"], answer: "2倍" },
-    { q: "半徑是直徑的幾分之幾？", options: ["二分之一", "三分之一", "四分之一"], answer: "二分之一" },
-    { q: "半徑5公分，圓面積約是多少？", options: ["78.5平方公分", "25平方公分", "31.4平方公分"], answer: "78.5平方公分" }
-  ],
-  "比例": [
-    { q: "2:3放大2倍是多少？", options: ["4:6", "2:3", "6:9"], answer: "4:6" },
-    { q: "6:9簡化後是多少？", options: ["2:3", "3:5", "1:2"], answer: "2:3" },
-    { q: "4:8簡化後是多少？", options: ["1:2", "2:3", "2:1"], answer: "1:2" },
-    { q: "8:4簡化後是多少？", options: ["2:1", "1:2", "4:8"], answer: "2:1" },
-    { q: "3:6=？:2", options: ["1", "2", "3"], answer: "1" }
-  ],
-  "資料統計": [
-    { q: "長條圖適合看什麼？", options: ["比較數量", "看時間變化", "看比例"], answer: "比較數量" },
-    { q: "圓餅圖適合看什麼？", options: ["看比例", "看高低", "看時間"], answer: "看比例" },
-    { q: "折線圖適合看什麼？", options: ["看變化趨勢", "看比例", "看數量"], answer: "看變化趨勢" },
-    { q: "統計圖表可以讓我們？", options: ["更清楚資料", "數字變多", "顏色變少"], answer: "更清楚資料" },
-    { q: "什麼圖適合看整體中各部分比例？", options: ["圓餅圖", "長條圖", "折線圖"], answer: "圓餅圖" }
+  "統計圖與可能性": [
+    { question: "某調查顯示 12 人中有 3 人愛蘋果，機率是？", answer: "1/4" },
+    { question: "圓形圖中，喜歡籃球佔 90 度，機率是？", answer: "1/4" },
+    { question: "某班40人，有10人選香蕉，機率？", answer: "1/4" },
+    { question: "一袋球中有紅5、藍5，隨機取一球，抽到藍球機率？", answer: "1/2" },
+    { question: "圓形圖中，360 度代表總人數，120 度代表喜好A，佔比為？", answer: "1/3" },
+    { question: "1～5數字中，抽偶數的機率？", answer: "2/5" },
+    { question: "下列哪個最可能？（1）丟硬幣出現正面（2）抽到紅球（3）地震機率", answer: "1" },
+    { question: "圓形圖佔180度，佔比為？", answer: "1/2" },
+    { question: "袋中3紅2綠1藍，隨機抽，抽到紅球機率？", answer: "1/2" },
+    { question: "圓形圖中，240度代表哪個機率？", answer: "2/3" },
+    { question: "抽撲克牌出黑桃的機率（共52張）？", answer: "1/4" },
+    { question: "某人調查中20人有5人選A，機率？", answer: "1/4" },
+    { question: "轉盤上有6區，抽到1號的機率？", answer: "1/6" },
+    { question: "丟骰子，出現奇數機率？", answer: "1/2" },
+    { question: "一組數據中，中位數是？（10, 15, 20）", answer: "15" }
   ]
 };
 
-let selectedQuestions = [];
+let currentQuestions = [];
 let currentIndex = 0;
 let score = 0;
-let hasAnswered = false;
 
-function startQuiz(unit) {
-  document.getElementById("unit-selection").classList.add("hidden");
-  document.getElementById("quiz").classList.remove("hidden");
-  selectedQuestions = shuffleArray([...allQuestions[unit]]).slice(0, 15);
+function startQuiz() {
+  const unit = document.getElementById("unitSelect").value;
+  if (!unit) {
+    alert("請先選擇單元！");
+    return;
+  }
+  currentQuestions = [...questionBank[unit]];
+  shuffleArray(currentQuestions);
   currentIndex = 0;
   score = 0;
-  document.getElementById("score").textContent = score;
-  document.getElementById("total").textContent = selectedQuestions.length;
+  document.getElementById("setup").style.display = "none";
+  document.getElementById("quiz").style.display = "block";
   showQuestion();
 }
 
 function showQuestion() {
-  const q = selectedQuestions[currentIndex];
-  document.getElementById("question-text").textContent = q.q;
-  const optionsDiv = document.getElementById("options");
-  optionsDiv.innerHTML = "";
-  document.getElementById("result").textContent = "";
-  hasAnswered = false;
-
-  shuffleArray(q.options).forEach(opt => {
-    const btn = document.createElement("button");
-    btn.className = "option";
-    btn.textContent = opt;
-    btn.onclick = () => checkAnswer(btn, opt, q.answer);
-    optionsDiv.appendChild(btn);
-  });
+  const question = currentQuestions[currentIndex];
+  document.getElementById("questionText").innerText = `第 ${currentIndex + 1} 題：${question.question}`;
+  document.getElementById("answerInput").value = "";
 }
 
-function checkAnswer(button, choice, correct) {
-  if (hasAnswered) return;
-  hasAnswered = true;
-  const result = document.getElementById("result");
-  const allOptions = document.querySelectorAll(".option");
-  allOptions.forEach(btn => btn.disabled = true);
-
-  if (choice === correct) {
+function submitAnswer() {
+  let input = document.getElementById("answerInput").value.trim();
+  let correct = currentQuestions[currentIndex].answer.trim();
+  input = formatAnswer(input);
+  correct = formatAnswer(correct);
+  if (input === correct) {
     score++;
-    document.getElementById("score").textContent = score;
-    result.textContent = "✅ 答對了！";
-    result.style.color = "green";
-  } else {
-    result.innerHTML = `❌ 錯了！<br>正確答案是：<b>${correct}</b>`;
-    result.style.color = "red";
   }
-}
-
-function nextQuestion() {
-  if (!hasAnswered) return alert("請先作答！");
   currentIndex++;
-  if (currentIndex < selectedQuestions.length) {
+  if (currentIndex < currentQuestions.length) {
     showQuestion();
   } else {
-    let message = score >= selectedQuestions.length * 0.8 ? "🎉 很棒喔！" : "💪 加油，下次更好！";
-    alert("測驗結束！得分：" + score + "/" + selectedQuestions.length + "\\n" + message);
-    restart();
+    endQuiz();
   }
 }
 
-function restart() {
-  document.getElementById("quiz").classList.add("hidden");
-  document.getElementById("unit-selection").classList.remove("hidden");
+function endQuiz() {
+  document.getElementById("quiz").style.display = "none";
+  document.getElementById("result").style.display = "block";
+  document.getElementById("scoreText").innerText = `測驗結束！你的得分是 ${score} / ${currentQuestions.length}`;
+}
+
+function restartQuiz() {
+  document.getElementById("result").style.display = "none";
+  document.getElementById("setup").style.display = "block";
+}
+
+function formatAnswer(ans) {
+  ans = ans.replace(/\s+/g, "");
+  if (ans.includes(".")) {
+    return parseFloat(ans).toFixed(2);
+  }
+  if (ans.includes("/")) {
+    const parts = ans.split("/");
+    const numerator = parseInt(parts[0]);
+    const denominator = parseInt(parts[1]);
+    const g = gcd(numerator, denominator);
+    return `${numerator / g}/${denominator / g}`;
+  }
+  return ans;
+}
+
+function gcd(a, b) {
+  return b === 0 ? a : gcd(b, a % b);
 }
 
 function shuffleArray(array) {
-  return array.sort(() => Math.random() - 0.5);
+  for (let i = array.length -1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i+1));
+    [array[i], array[j]] = [array[j], array[i]];
+  }
 }
-</script>
 
+</script>
 </body>
 </html>
