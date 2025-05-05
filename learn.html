@@ -1,400 +1,109 @@
 <!DOCTYPE html>
 <html lang="zh-Hant">
 <head>
-  <meta charset="UTF-8" />
-  <title>教學單元選擇</title>
+  <meta charset="UTF-8">
+  <title>六年級數學教學</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <style>
-    body {
-      font-family: Arial, sans-serif;
-      background-color: #f5f9ff;
-      padding: 40px 20px;
-      line-height: 1.6;
-    }
-    h1 {
-      text-align: center;
-      color: #1e70bf;
-      margin-bottom: 40px;
-    }
-    .grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-      gap: 20px;
-      max-width: 1000px;
-      margin: auto;
-    }
-    .card {
-      background: white;
-      padding: 20px;
-      border-radius: 12px;
-      box-shadow: 0 0 10px #ccc;
-      transition: transform 0.2s;
-    }
-    .card:hover {
-      transform: scale(1.03);
-    }
-    .card-title {
-      font-weight: bold;
-      font-size: 18px;
-      color: #1e70bf;
-      margin-bottom: 10px;
-    }
-    .card-desc {
-      font-size: 15px;
-      margin-bottom: 12px;
-      color: #333;
-    }
-    .button {
-      text-decoration: none;
-      color: #ffffff;
-      background-color: #1e70bf;
-      padding: 8px 16px;
-      border-radius: 8px;
-      display: inline-block;
-    }
+    body { font-family: sans-serif; background: #f9f9f9; margin: 0; padding: 0; text-align: center; }
+    header { background-color: #4a90e2; color: white; padding: 2rem 0; }
+    .container { max-width: 800px; margin: 2rem auto; background: white; padding: 2rem; border-radius: 10px; }
+    details { margin-bottom: 1rem; text-align: left; }
+    summary { font-weight: bold; font-size: 1.2rem; cursor: pointer; color: #4a90e2; }
+    p, li { margin: 0.5rem 0 1rem 1rem; }
+    ul { margin-left: 2rem; }
+    .back { margin: 2rem; }
+    .back a { text-decoration: none; color: #4a90e2; border: 1px solid #4a90e2; padding: 0.5rem 1rem; border-radius: 5px; }
   </style>
 </head>
 <body>
-  <h1>請選擇教學單元</h1>
 
-  <div class="grid">
-    <div class="card">
-      <div class="card-title">單元一：小數與分數四則運算</div>
-      <p class="card-desc">學會如何進行小數與分數的加減乘除，包含通分與倒數技巧。</p>
-      
-    </div>
-<!DOCTYPE html>
-<html lang="zh-Hant">
-<head>
-  <meta charset="UTF-8" />
-  
-    <h1>單元一：小數與分數四則運算</h1>
+<header>
+  <h1>📘 六年級數學教學</h1>
+</header>
 
-    <div class="section">
-      <h2>📘 公式講解</h2>
-      <ul>
-        <li><b>分數加減：</b>先通分（找最小公倍數），再加減。</li>
-        <li><b>分數乘法：</b>分子乘分子，分母乘分母。</li>
-        <li><b>分數除法：</b>除以分數 = 乘上它的倒數。</li>
-        <li><b>小數加減：</b>小數點對齊後再計算。</li>
-        <li><b>小數乘除：</b>照一般運算，注意小數點要移位。</li>
-      </ul>
-    </div>
+<div class="container">
 
-    <div class="section">
-      <h2>📝 範例題一</h2>
-      <p><b>題目：</b>小明喝了 <math><mfrac><mn>2</mn><mn>3</mn></mfrac></math> 杯水，小華喝了 <math><mfrac><mn>1</mn><mn>6</mn></mfrac></math> 杯水，一共喝了多少杯？</p>
-      <p><b>解法：</b></p>
-      <ul>
-        <li>找最小公倍數 → 6</li>
-        <li>通分：<math><mfrac><mn>2</mn><mn>3</mn></mfrac> = <mfrac><mn>4</mn><mn>6</mn></mfrac></math></li>
-        <li>加總：<math><mfrac><mn>4</mn><mn>6</mn></mfrac> + <mfrac><mn>1</mn><mn>6</mn></mfrac> = <mfrac><mn>5</mn><mn>6</mn></mfrac></math></li>
-        <li><b>答案：</b><math><mfrac><mn>5</mn><mn>6</mn></mfrac></math> 杯</li>
-      </ul>
-    </div>
+  <details>
+    <summary>1. 分數與小數互換</summary>
+    <p>🔹 分數：表示把一個整體分成若干份，取其中的部分。</p>
+    <p>🔹 小數：是分數的另一種表示方法，特別是十分位、百分位的小數。</p>
+    <p>【轉換方法】分子 ÷ 分母 = 小數</p>
+    <ul>
+      <li>1/2 = 1 ÷ 2 = 0.5</li>
+      <li>3/4 = 3 ÷ 4 = 0.75</li>
+    </ul>
+    <p><strong>小提醒：</strong> 分子比分母大的時候，答案會大於 1，例如 5/4 = 1.25。</p>
+  </details>
 
-    <div class="section">
-      <h2>📝 範例題二</h2>
-      <p><b>題目：</b> <math><mfrac><mn>3</mn><mn>4</mn></mfrac></math> ÷ <math><mfrac><mn>2</mn><mn>5</mn></mfrac></math> = ?</p>
-      <p><b>解法：</b></p>
-      <ul>
-        <li>除法變乘法：<math><mfrac><mn>3</mn><mn>4</mn></mfrac> × <mfrac><mn>5</mn><mn>2</mn></mfrac></math></li>
-        <li>相乘：<math><mfrac><mn>15</mn><mn>8</mn></mfrac></math></li>
-        <li>化成帶分數：1 <math><mfrac><mn>7</mn><mn>8</mn></mfrac></math></li>
-        <li><b>答案：</b>1 <math><mfrac><mn>7</mn><mn>8</mn></mfrac></math></li>
-      </ul>
-    </div>
+  <details>
+    <summary>2. 百分比的計算與應用</summary>
+    <p>🔹 百分比：以 100 為基礎，表示一個數量與整體的關係。</p>
+    <p>【轉換方法】百分比 ÷ 100 = 小數</p>
+    <ul>
+      <li>25% = 0.25</li>
+      <li>50% = 0.5</li>
+      <li>75% = 0.75</li>
+    </ul>
+    <p><strong>例題：</strong> 30% = 0.3，8% = 0.08</p>
+    <p><strong>小提醒：</strong> 百分比不是直接拿掉「%」，要先除以 100！</p>
+  </details>
 
-    <div class="section">
-      <h2>💡 小提醒</h2>
-      <ul>
-        <li>分數加減時，一定要通分，不能直接加。</li>
-        <li>分數除法「要倒數再乘」，是學生最常忘記的步驟。</li>
-        <li>小數乘除記得數小數點位數，不要漏掉。</li>
-      </ul>
-    </div>
+  <details>
+    <summary>3. 面積公式</summary>
+    <p>🔹 面積：物體表面的大小，通常用平方單位表示（如 cm²）。</p>
+    <p>【長方形面積公式】長 × 寬</p>
+    <p>【正方形面積公式】邊長 × 邊長</p>
+    <ul>
+      <li>長 5cm、寬 4cm 的長方形面積 = 5 × 4 = 20cm²</li>
+      <li>邊長 6cm 的正方形面積 = 6 × 6 = 36cm²</li>
+    </ul>
+    <p><strong>小提醒：</strong> 記得單位要平方（cm²、m²）！</p>
+  </details>
 
-   
-  </div>
+  <details>
+    <summary>4. 圓形公式</summary>
+    <p>🔹 圓周長公式：2 × π × 半徑 (r)</p>
+    <p>🔹 圓面積公式：π × 半徑 × 半徑</p>
+    <ul>
+      <li>π 約等於 3.14</li>
+      <li>圓周長例題：半徑 5cm，圓周長 ≈ 2 × 3.14 × 5 = 31.4cm</li>
+      <li>圓面積例題：半徑 3cm，圓面積 ≈ 3.14 × 3 × 3 = 28.26cm²</li>
+    </ul>
+    <p><strong>小提醒：</strong> 面積是平方單位，周長是長度單位！</p>
+  </details>
+
+  <details>
+    <summary>5. 比例與比的應用</summary>
+    <p>🔹 比：比較兩個數量的大小，寫成「a:b」。</p>
+    <p>🔹 比例：兩個比相等，表示兩組數量之間有固定的倍數關係。</p>
+    <ul>
+      <li>2:3 和 4:6 是相同的比例。</li>
+      <li>化簡比例：6:9 可簡化為 2:3</li>
+    </ul>
+    <p><strong>例題：</strong> 10:15 = 2:3（除以 5）</p>
+    <p><strong>小提醒：</strong> 簡化比例時，要同時除以相同的數。</p>
+  </details>
+
+  <details>
+    <summary>6. 資料統計與圖表解讀</summary>
+    <p>🔹 長條圖：比較不同項目的數量。</p>
+    <p>🔹 圓餅圖：顯示整體中各部分的比例。</p>
+    <p>🔹 折線圖：觀察數據隨時間變化的趨勢。</p>
+    <ul>
+      <li>長條圖例子：比較各班人數。</li>
+      <li>圓餅圖例子：顯示一週內各科目讀書時間比例。</li>
+      <li>折線圖例子：記錄一週每天的氣溫變化。</li>
+    </ul>
+    <p><strong>小提醒：</strong> 看圖表時要注意標題和單位！</p>
+  </details>
+
+</div>
+
+<div class="back">
+  <a href="index.html">← 返回首頁</a>
+</div>
+
 </body>
 </html>
 
-    <div class="card">
-      <div class="card-title">單元二：圓面積與扇形面積</div>
-      <p class="card-desc">理解圓與扇形面積公式，能應用在生活幾何題上。</p>
-    
-    </div>
-<!DOCTYPE html>
-<html lang="zh-Hant">
-<head>
-  <meta charset="UTF-8" />
-  
-    <h1>單元二：圓面積與扇形面積</h1>
-
-    <div class="section">
-      <h2>📘 公式講解</h2>
-      <ul>
-        <li><b>圓面積：</b> 面積 = 圓周率 × 半徑 × 半徑</li>
-        <li><b>扇形面積：</b> 扇形面積 = (中心角 ÷ 360) × 圓面積</li>
-        <li>常用圓周率值：\\( \pi ≈ 3.14 \\)</li>
-      </ul>
-    </div>
-
-    <div class="section">
-      <h2>📝 範例題一</h2>
-      <p><b>題目：</b>一個半徑是 5 公分的圓，面積是多少平方公分？</p>
-      <p><b>解法：</b></p>
-      <ul>
-        <li>公式：\\( 面積 = 3.14 × 5 × 5 \\)</li>
-        <li>計算：\\( 3.14 × 25 = 78.5 \\)</li>
-        <li><b>答案：</b>78.5 平方公分</li>
-      </ul>
-    </div>
-
-    <div class="section">
-      <h2>📝 範例題二</h2>
-      <p><b>題目：</b>一個半徑是 6 公分的圓，若中心角是 90°，扇形的面積是多少？</p>
-      <p><b>解法：</b></p>
-      <ul>
-        <li>圓面積：\\( 3.14 × 6 × 6 = 113.04 \\)</li>
-        <li>扇形占四分之一：\\( 113.04 × (90 ÷ 360) = 28.26 \\)</li>
-        <li><b>答案：</b>約 28.26 平方公分</li>
-      </ul>
-    </div>
-
-    <div class="section">
-      <h2>💡 小提醒</h2>
-      <ul>
-        <li>「半徑平方」就是半徑 × 自己。</li>
-        <li>中心角是 360° 的幾分之幾，就表示占圓的幾分之幾。</li>
-        <li>有些題目會問「扇形的比例」，要記得套用比例算。</li>
-      </ul>
-    </div>
-
-    
-  </div>
-</body>
-</html>
-
-    <div class="card">
-      <div class="card-title">單元三：速率</div>
-      <p class="card-desc">學習速率、路程與時間的關係，解決實際應用問題。</p>
-    
-    </div>
-<!DOCTYPE html>
-<html lang="zh-Hant">
-<head>
-  <meta charset="UTF-8" />
-  
-    <h1>單元三：速率</h1>
-
-    <div class="section">
-      <h2>📘 公式講解</h2>
-      <ul>
-        <li><b>速率 = 路程 ÷ 時間</b></li>
-        <li><b>路程 = 速率 × 時間</b></li>
-        <li><b>時間 = 路程 ÷ 速率</b></li>
-      </ul>
-      <p>三個公式是一組互相變換的關係，記得一個公式，其他就能推出來！</p>
-    </div>
-
-    <div class="section">
-      <h2>📝 範例題一</h2>
-      <p><b>題目：</b>小明走了 120 公尺，花了 2 分鐘，他的速率是多少？</p>
-      <p><b>解法：</b></p>
-      <ul>
-        <li>套公式：速率 = 120 ÷ 2 = 60</li>
-        <li><b>答案：</b>每分鐘 60 公尺</li>
-      </ul>
-    </div>
-
-    <div class="section">
-      <h2>📝 範例題二</h2>
-      <p><b>題目：</b>一列火車速率是 90 公里／小時，要開 270 公里，需要幾小時？</p>
-      <p><b>解法：</b></p>
-      <ul>
-        <li>時間 = 路程 ÷ 速率 = 270 ÷ 90 = 3</li>
-        <li><b>答案：</b>3 小時</li>
-      </ul>
-    </div>
-
-    <div class="section">
-      <h2>💡 小提醒</h2>
-      <ul>
-        <li>單位要一致：不能用公尺和分鐘混在一起算。</li>
-        <li>出題時會變化公式順序，但三個公式都可以互換。</li>
-        <li>速率的單位可以是：公里／小時、公尺／秒、公尺／分鐘等。</li>
-      </ul>
-    </div>
-
-
-  </div>
-</body>
-</html>
-
-    <div class="card">
-      <div class="card-title">單元四：資料統計與可能性</div>
-      <p class="card-desc">掌握平均數與機率的基本概念，提升資料分析能力。</p>
-    
-    </div>
-<!DOCTYPE html>
-<html lang="zh-Hant">
-<head>
-  <meta charset="UTF-8" />
-  
-    <h1>單元四：資料統計與可能性</h1>
-
-    <div class="section">
-      <h2>📘 公式講解</h2>
-      <ul>
-        <li><b>平均數：</b>平均 = 總和 ÷ 數量</li>
-        <li><b>可能性：</b>可能性 = 想要的情況 ÷ 所有可能情況</li>
-        <li><b>百分比表示：</b>可以將可能性 × 100%，轉換成百分數</li>
-      </ul>
-    </div>
-
-    <div class="section">
-      <h2>📝 範例題一：平均數</h2>
-      <p><b>題目：</b>五位同學的分數是：80、85、90、95 和 100，請問平均分是多少？</p>
-      <p><b>解法：</b></p>
-      <ul>
-        <li>總和 = 80 + 85 + 90 + 95 + 100 = 450</li>
-        <li>人數 = 5</li>
-        <li>平均 = 450 ÷ 5 = 90</li>
-        <li><b>答案：</b>90 分</li>
-      </ul>
-    </div>
-
-    <div class="section">
-      <h2>📝 範例題二：可能性</h2>
-      <p><b>題目：</b>袋子中有 3 顆紅球和 2 顆藍球，從中任意抽一顆，抽到紅球的可能性是多少？</p>
-      <p><b>解法：</b></p>
-      <ul>
-        <li>紅球有 3 顆，總共有 5 顆球</li>
-        <li>可能性 = 3 ÷ 5 = 0.6 或 60%</li>
-        <li><b>答案：</b>0.6 或 60%</li>
-      </ul>
-    </div>
-
-    <div class="section">
-      <h2>💡 小提醒</h2>
-      <ul>
-        <li>計算平均時，不要忘記是「全部加起來 ÷ 數量」。</li>
-        <li>機率題常出現「簡單比例」或「表格資訊」。</li>
-        <li>如果是「不放回」的抽球題，第二次抽的總數會改變。</li>
-      </ul>
-    </div>
-
-    
-    <div class="card">
-      <div class="card-title">單元五：年齡問題與平均數</div>
-      <p class="card-desc">解決年齡差與平均數相關問題，培養邏輯推理能力。</p>
-      
-<!DOCTYPE html>
-<html lang="zh-Hant">
-<head>
-  <meta charset="UTF-8" />
-  
-    <h1>單元五：年齡問題、平均數、追趕問題</h1>
-
-    <div class="section">
-      <h2>📘 公式講解</h2>
-      <ul>
-        <li><b>年齡問題：</b>年齡差不變，未來或過去都可用相同差值解題。</li>
-        <li><b>平均數：</b>平均 = 總和 ÷ 人數</li>
-        <li><b>追趕問題：</b>相距 ÷ 速度差 = 追上所需時間</li>
-      </ul>
-    </div>
-
-    <div class="section">
-      <h2>📝 範例題一：年齡問題</h2>
-      <p><b>題目：</b>現在爸爸 40 歲，小明 10 歲，請問再過 5 年後，爸爸比小明大幾歲？</p>
-      <ul>
-        <li>過了 5 年：爸爸 45，小明 15</li>
-        <li>年齡差 = 45 − 15 = 30（與原來一樣）</li>
-        <li><b>答案：</b>爸爸還是大 30 歲</li>
-      </ul>
-    </div>
-
-    <div class="section">
-      <h2>📝 範例題二：平均問題</h2>
-      <p><b>題目：</b>三個人總共存了 900 元，平均每人存多少？</p>
-      <ul>
-        <li>平均 = 900 ÷ 3 = 300</li>
-        <li><b>答案：</b>每人存 300 元</li>
-      </ul>
-    </div>
-
-    <div class="section">
-      <h2>📝 範例題三：追趕問題</h2>
-      <p><b>題目：</b>A 比 B 早出發 20 分鐘，A 每分鐘走 80 公尺，B 每分鐘走 100 公尺。B 何時追上 A？</p>
-      <ul>
-        <li>A 先走了 20 分鐘 → 距離 = 80 × 20 = 1600 公尺</li>
-        <li>速度差 = 100 − 80 = 20 公尺／分鐘</li>
-        <li>追上時間 = 1600 ÷ 20 = 80 分鐘</li>
-        <li><b>答案：</b>B 在 80 分鐘後追上 A</li>
-      </ul>
-    </div>
-
-    <div class="section">
-      <h2>💡 小提醒</h2>
-      <ul>
-        <li>年齡問題常考「幾年前幾年後」，要注意年齡差不變。</li>
-        <li>平均問題有時會反推「總和」或「人數」，小心題意。</li>
-        <li>追趕問題要記得先算「相差的距離」與「速度差」。</li>
-      </ul>
-    </div>
-
-    
-
-    <div class="card">
-      <div class="card-title">單元六：角柱與圓柱</div>
-      <p class="card-desc">學習角柱與圓柱的體積與表面積計算，應用於立體幾何。</p>
-      
-  </div>
-</body>
-</html>
-<!DOCTYPE html>
-<html lang="zh-Hant">
-<head>
-  <meta charset="UTF-8" />
-    
-    <h1>單元六：角柱與圓柱</h1>
-
-    <div class="section">
-      <h2>📘 公式講解</h2>
-      <ul>
-        <li><b>角柱體積：</b>體積 = 底面積 × 高</li>
-        <li><b>圓柱體積：</b>體積 = 圓面積 × 高 = \\( \pi r^2 × 高 \\)</li>
-        <li><b>側面面積：</b>可展開為長方形，高 × 底面周長</li>
-      </ul>
-    </div>
-
-    <div class="section">
-      <h2>📝 範例題一：角柱體積</h2>
-      <p><b>題目：</b>一個角柱底面積是 30 平方公分，高是 10 公分，體積是多少？</p>
-      <ul>
-        <li>體積 = 30 × 10 = 300</li>
-        <li><b>答案：</b>300 立方公分</li>
-      </ul>
-    </div>
-
-    <div class="section">
-      <h2>📝 範例題二：圓柱體積</h2>
-      <p><b>題目：</b>一個圓柱半徑為 4 公分，高為 12 公分，體積是多少？</p>
-      <ul>
-        <li>圓面積 = \\( 3.14 × 4 × 4 = 50.24 \\)</li>
-        <li>體積 = 50.24 × 12 = 602.88</li>
-        <li><b>答案：</b>602.88 立方公分</li>
-      </ul>
-    </div>
-
-    <div class="section">
-      <h2>💡 小提醒</h2>
-      <ul>
-        <li>角柱可以是三角柱、五角柱等，要先算出底面積。</li>
-        <li>圓柱體積的公式中，半徑要平方，不是乘 2。</li>
-        <li>側面展開圖是長方形，長 = 底面周長，寬 = 高。</li>
-      </ul>
-    </div>
-
-    
