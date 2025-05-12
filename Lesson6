@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8" />
+  <title>單元六：角柱與圓柱</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f5f9ff;
+      padding: 20px;
+      line-height: 1.6;
+    }
+    .container {
+      max-width: 800px;
+      margin: auto;
+      background: white;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 0 10px #ccc;
+    }
+    h1 {
+      color: #1e70bf;
+    }
+    .section {
+      margin-bottom: 25px;
+    }
+    ul {
+      padding-left: 20px;
+    }
+    .button {
+      display: inline-block;
+      margin-top: 30px;
+      padding: 10px 20px;
+      background-color: #1e70bf;
+      color: white;
+      text-decoration: none;
+      border-radius: 8px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>單元六：角柱與圓柱</h1>
+
+    <div class="section">
+      <h2>📘 公式講解</h2>
+      <ul>
+        <li><b>角柱體積：</b>體積 = 底面積 × 高</li>
+        <li><b>圓柱體積：</b>體積 = 圓面積 × 高 = \\( \pi r^2 × 高 \\)</li>
+        <li><b>側面面積：</b>可展開為長方形，高 × 底面周長</li>
+      </ul>
+    </div>
+
+    <div class="section">
+      <h2>📝 範例題一：角柱體積</h2>
+      <p><b>題目：</b>一個角柱底面積是 30 平方公分，高是 10 公分，體積是多少？</p>
+      <ul>
+        <li>體積 = 30 × 10 = 300</li>
+        <li><b>答案：</b>300 立方公分</li>
+      </ul>
+    </div>
+
+    <div class="section">
+      <h2>📝 範例題二：圓柱體積</h2>
+      <p><b>題目：</b>一個圓柱半徑為 4 公分，高為 12 公分，體積是多少？</p>
+      <ul>
+        <li>圓面積 = \\( 3.14 × 4 × 4 = 50.24 \\)</li>
+        <li>體積 = 50.24 × 12 = 602.88</li>
+        <li><b>答案：</b>602.88 立方公分</li>
+      </ul>
+    </div>
+
+    <div class="section">
+      <h2>💡 小提醒</h2>
+      <ul>
+        <li>角柱可以是三角柱、五角柱等，要先算出底面積。</li>
+        <li>圓柱體積的公式中，半徑要平方，不是乘 2。</li>
+        <li>側面展開圖是長方形，長 = 底面周長，寬 = 高。</li>
+      </ul>
+    </div>
+
+    <a class="button" href="teaching.html">← 回教學單元</a>
+  </div>
+</body>
+</html>
